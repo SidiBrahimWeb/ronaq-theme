@@ -1,0 +1,48 @@
+<section id="faq" class="py-24 bg-soft-white" aria-label="الأسئلة الشائعة">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-14">
+            <span class="inline-block text-gold font-bold text-sm tracking-widest mb-2 uppercase">دعم العملاء</span>
+            <h2 class="text-3xl lg:text-4xl font-black text-navy-dark mb-4">{{ trans('common.elements.faq') }}</h2>
+            <div class="w-16 h-1 bg-gold mx-auto rounded-full mb-4"></div>
+            <p class="text-neutral-500 max-w-lg mx-auto">كل ما تود معرفته عن خدماتنا ومنتجاتنا في مكان واحد</p>
+        </div>
+
+        <div class="space-y-4">
+            {% set faqs = [
+                {
+                    'q': 'هل جميع المنتجات في المتجر أصلية؟',
+                    'a': 'نعم، نضمن لكم أن جميع منتجاتنا أصلية 100% ومستوردة من مصادرها الرسمية مباشرة. نقدم شهادات ضمان لجميع الساعات والمجوهرات الفاخرة.'
+                },
+                {
+                    'q': 'كم تستغرق عملية التوصيل داخل المملكة؟',
+                    'a': 'يتم معالجة الطلب فور تأكيده. التوصيل داخل الرياض خلال 24 ساعة، وباقي مناطق المملكة خلال 2-4 أيام عمل عبر شركاء الشحن المعتمدين لدينا.'
+                },
+                {
+                    'q': 'ما هي سياسة الاسترجاع والاستبدال؟',
+                    'a': 'يمكنكم استبدال أو استرجاع المنتجات خلال 7 أيام من تاريخ الاستلام، بشرط أن تكون في حالتها الأصلية وبتغليفها الأصلي. تطبق الشروط والأحكام على العطور المفتوحة.'
+                },
+                {
+                    'q': 'هل يمكنني تتبع طلبي؟',
+                    'a': 'نعم، بعد تأكيد الطلب ستصلك رسالة على بريدك الإلكتروني ورقم هاتفك تحتوي على رمز التتبع، كما يمكنك متابعة الطلب من حسابك في المتجر.'
+                },
+                {
+                    'q': 'ما طرق الدفع المتاحة؟',
+                    'a': 'نقبل جميع طرق الدفع الإلكتروني المعتمدة: بطاقات فيزا وماستركارد ومدى، والدفع عبر Apple Pay وSTC Pay وتحويل بنكي.'
+                }
+            ] %}
+
+            {% for faq in faqs %}
+            <div class="faq-item bg-white rounded-3xl border border-neutral-100 overflow-hidden shadow-sm transition-all duration-500 group">
+                <button class="faq-btn w-full flex items-center justify-between p-6 md:p-7 text-right font-bold text-base md:text-lg text-navy-dark group-hover:text-gold transition-colors"
+                    aria-expanded="false">
+                    <span>{{ faq.q }}</span>
+                    <i data-lucide="plus" class="w-5 h-5 shrink-0 transition-transform duration-500 text-gold/50 group-hover:text-gold"></i>
+                </button>
+                <div class="faq-content hidden px-7 pb-7 text-neutral-500 leading-relaxed text-sm">
+                    {{ faq.a }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

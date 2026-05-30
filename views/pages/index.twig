@@ -1,0 +1,21 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+    {# البانر الرئيسي #}
+    {% include 'components.home.hero' %}
+
+    {# تصنيفات سريعة #}
+    {% include 'components.home.categories' %}
+
+    {# المنتجات المميزة #}
+    {% include 'components.home.featured-products' %}
+
+    {# بانرات العروض #}
+    {% include 'components.home.offers-banner' %}
+
+    {# من نحن #}
+    {% include 'components.home.about-us' %}
+
+    {# الأسئلة الشائعة #}
+    {% include 'components.home.faq' %}
+{% endblock %}

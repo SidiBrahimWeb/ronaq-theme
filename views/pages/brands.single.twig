@@ -1,0 +1,64 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="py-10 lg:py-16">
+    <div class="container mx-auto px-4">
+
+        {# رأس صفحة الماركة #}
+        <div class="flex items-center gap-8 mb-12 p-8 bg-white rounded-3xl border border-neutral-100 shadow-sm">
+            {% if brand.image is defined and brand.image %}
+            <div class="w-24 h-24 shrink-0 rounded-2xl bg-soft-white flex items-center justify-center overflow-hidden">
+                <img src="{{ brand.image.url|default(brand.image) }}" alt="{{ brand.name }}" class="w-full h-full object-contain">
+            </div>
+            {% endif %}
+            <div>
+                <h1 class="text-3xl font-black text-navy-dark mb-2">{{ brand.name }}</h1>
+                {% if brand.description %}
+                    <p class="text-gray-500">{{ brand.description }}</p>
+                {% endif %}
+                {% if brand.products_count is defined %}
+                    <p class="text-sm text-gold font-bold mt-2">{{ brand.products_count }} {{ trans('brands.products_count') }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {# منتجات الماركة #}
+        {% if products is defined and products|length %}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+                {% for product in products %}
+                <div class="group bg-white rounded-3xl overflow-hidden border border-neutral-200/60 flex flex-col transition-all duration-500 hover:shadow-xl hover:-translate-y-2 hover:border-gold/30">
+                    <div class="relative aspect-[4/5] overflow-hidden bg-soft-white">
+                        <a href="{{ product.url }}" class="block w-full h-full">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110">
+                        </a>
+                        {% if product.on_sale %}
+                            <span class="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full">
+                                خصم {{ product.discount_percentage }}%
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <h3 class="font-bold text-navy-dark group-hover:text-gold transition-colors line-clamp-2 mb-3 flex-grow">
+                            <a href="{{ product.url }}">{{ product.name }}</a>
+                        </h3>
+                        <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
+                            <span class="text-navy-dark font-black text-lg">{{ product.price|money }}</span>
+                            <button salla-cart-add="{{ product.id }}"
+                                class="w-11 h-11 bg-navy-dark text-white rounded-2xl flex items-center justify-center hover:bg-gold transition-all">
+                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-20">
+                <p class="text-gray-400 text-lg">{{ trans('common.elements.no_results') }}</p>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

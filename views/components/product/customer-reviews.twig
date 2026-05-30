@@ -1,0 +1,66 @@
+<section class="mt-24 lg:mt-32" aria-label="{{ trans('common.elements.customer_reviews') }}">
+    <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
+
+        {# ملخص التقييمات #}
+        <div class="md:w-72 shrink-0">
+            <h2 class="text-2xl font-black text-navy-dark mb-6">{{ trans('common.elements.customer_reviews') }}</h2>
+            <div class="bg-soft-white p-7 rounded-3xl text-center border border-neutral-100">
+                <div class="text-6xl font-black text-navy-dark mb-3">
+                    {{ product.rating|default('0.0') }}
+                </div>
+                <div class="flex justify-center gap-1 text-gold mb-3">
+                    {% for i in 1..5 %}
+                        <i data-lucide="star" class="w-5 h-5 {% if i <= product.rating|default(0)|round %}fill-current{% else %}text-gray-200{% endif %}"></i>
+                    {% endfor %}
+                </div>
+                <p class="text-gray-500 text-xs font-bold mb-7">
+                    بناءً على {{ product.reviews_count|default('0') }} تقييم حقيقي
+                </p>
+                <button salla-review-add="{{ product.id }}"
+                    class="w-full bg-navy-dark text-white py-4 rounded-2xl font-bold hover:bg-gold transition-all duration-300 text-sm">
+                    {{ trans('common.elements.write_review') }}
+                </button>
+            </div>
+        </div>
+
+        {# قائمة التقييمات #}
+        <div class="flex-1 space-y-7">
+            {% for review in product.reviews %}
+                <article class="border-b border-gray-50 pb-7 last:border-0 last:pb-0">
+                    <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center font-bold text-navy-dark text-lg shrink-0">
+                                {{ review.author.name|slice(0, 1) }}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-navy-dark">{{ review.author.name }}</h4>
+                                <div class="flex items-center gap-1 text-gold mt-1">
+                                    {% for i in 1..5 %}
+                                        <i data-lucide="star" class="w-3 h-3 {% if i <= review.rating %}fill-current{% else %}text-gray-200{% endif %}"></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-gray-400 bg-gray-50 px-3 py-1 rounded-full">
+                            {{ review.created_at|date("Y/m/d") }}
+                        </span>
+                    </div>
+                    {% if review.title is defined and review.title %}
+                        <h5 class="font-bold text-navy-dark mb-2 text-sm">{{ review.title }}</h5>
+                    {% endif %}
+                    <p class="text-neutral-500 leading-relaxed text-sm">{{ review.content }}</p>
+                </article>
+            {% else %}
+                <div class="text-center py-12 bg-soft-white rounded-3xl border border-neutral-100">
+                    <i data-lucide="message-circle" class="w-12 h-12 text-gray-200 mx-auto mb-4"></i>
+                    <p class="text-gray-400 font-bold">{{ trans('common.elements.no_reviews') }}</p>
+                    <button salla-review-add="{{ product.id }}"
+                        class="mt-4 inline-flex items-center gap-2 text-gold font-bold text-sm hover:underline">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        {{ trans('common.elements.write_review') }}
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

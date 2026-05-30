@@ -1,0 +1,11 @@
+{% if theme.settings.show_announcement %}
+<div class="bg-navy-dark text-white py-2.5 text-center text-xs font-medium border-b border-gold/20" role="banner">
+    <div class="container mx-auto px-4">
+        <p class="flex items-center justify-center gap-3 flex-wrap">
+            <i data-lucide="star" class="w-3 h-3 text-gold shrink-0 fill-current"></i>
+            <span>{{ theme.settings.announcement_text|default('شحن مجاني للطلبات أكثر من 500 ريال | استخدم كود GOLD20 لخصم 20%')|raw }}</span>
+            <i data-lucide="star" class="w-3 h-3 text-gold shrink-0 fill-current"></i>
+        </p>
+    </div>
+</div>
+{% endif %}

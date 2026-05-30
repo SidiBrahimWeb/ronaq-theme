@@ -1,0 +1,78 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="py-10 lg:py-16 min-h-[60vh]">
+    <div class="container mx-auto px-4">
+
+        {# رأس صفحة البحث #}
+        <div class="mb-10">
+            <h1 class="text-3xl font-black text-navy-dark mb-2">{{ trans('search.title') }}</h1>
+            {% if query is defined and query %}
+                <p class="text-gray-500">
+                    {{ trans('search.results_for') }}: <strong class="text-navy-dark">"{{ query }}"</strong>
+                    {% if products is defined %}
+                        — {{ products.total|default(0) }} {{ trans('search.results') }}
+                    {% endif %}
+                </p>
+            {% endif %}
+        </div>
+
+        {# حقل البحث #}
+        <div class="max-w-2xl mb-12">
+            <form action="{{ link('search') }}" method="GET" class="relative">
+                <input type="text" name="q" value="{{ query|default('') }}"
+                    placeholder="{{ trans('search.placeholder') }}"
+                    class="w-full bg-white border-2 border-gray-200 rounded-2xl py-5 px-6 pr-16 focus:outline-none focus:border-gold transition-colors text-navy-dark font-medium text-lg shadow-sm">
+                <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-gold text-white rounded-xl flex items-center justify-center hover:bg-navy-dark transition-all">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+            </form>
+        </div>
+
+        {# نتائج البحث #}
+        {% if products is defined and products|length %}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+                {% for product in products %}
+                    <div class="group bg-white rounded-3xl overflow-hidden border border-neutral-200/60 flex flex-col transition-all duration-500 hover:shadow-xl hover:-translate-y-2 hover:border-gold/30">
+                        <div class="relative aspect-[4/5] overflow-hidden bg-soft-white">
+                            <a href="{{ product.url }}" class="block w-full h-full">
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110">
+                            </a>
+                            {% if product.on_sale %}
+                                <span class="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full">
+                                    خصم {{ product.discount_percentage }}%
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-bold text-navy-dark group-hover:text-gold transition-colors line-clamp-2 mb-3 flex-grow">
+                                <a href="{{ product.url }}">{{ product.name }}</a>
+                            </h3>
+                            <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
+                                <span class="text-navy-dark font-black text-lg">{{ product.price|money }}</span>
+                                <button salla-cart-add="{{ product.id }}"
+                                    class="w-11 h-11 bg-navy-dark text-white rounded-2xl flex items-center justify-center hover:bg-gold transition-all">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elseif query is defined and query %}
+            <div class="text-center py-20">
+                <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i data-lucide="search-x" class="w-10 h-10 text-gray-300"></i>
+                </div>
+                <h2 class="text-2xl font-black text-navy-dark mb-3">{{ trans('search.no_results') }} "{{ query }}"</h2>
+                <p class="text-gray-400 mb-8">{{ trans('search.no_results_msg') }}</p>
+                <a href="{{ link('/') }}" class="inline-flex items-center gap-2 bg-navy-dark text-white px-8 py-4 rounded-xl font-bold hover:bg-gold transition-all">
+                    {{ trans('common.elements.home') }}
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

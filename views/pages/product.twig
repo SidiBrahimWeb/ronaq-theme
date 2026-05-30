@@ -1,0 +1,39 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="py-8 lg:py-16">
+    <div class="container mx-auto px-4">
+
+        {# مسار التنقل - Breadcrumbs #}
+        {% if breadcrumbs is defined and breadcrumbs|length %}
+        <nav aria-label="breadcrumb" class="flex items-center gap-2 text-xs font-bold text-gray-400 mb-8 overflow-x-auto whitespace-nowrap">
+            {% for breadcrumb in breadcrumbs %}
+                <a href="{{ breadcrumb.url }}"
+                    class="hover:text-gold transition-colors {% if loop.last %}text-navy-dark pointer-events-none{% endif %}">
+                    {{ breadcrumb.title }}
+                </a>
+                {% if not loop.last %}
+                    <i data-lucide="chevron-left" class="w-3 h-3 shrink-0"></i>
+                {% endif %}
+            {% endfor %}
+        </nav>
+        {% endif %}
+
+        {# تفاصيل المنتج الرئيسية #}
+        {% include 'components.product.product-details' %}
+
+        {# تبويبات المنتج #}
+        {% include 'components.product.product-tabs' %}
+
+        {# تقييمات العملاء #}
+        {% include 'components.product.customer-reviews' %}
+
+        {# منتجات ذات صلة #}
+        {% include 'components.product.related-products' %}
+
+    </div>
+</div>
+
+{# شريط الشراء الثابت للجوال #}
+{% include 'components.product.mobile-buy-bar' %}
+{% endblock %}

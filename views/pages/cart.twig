@@ -1,0 +1,152 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="py-10 lg:py-16 min-h-[60vh]">
+    <div class="container mx-auto px-4">
+
+        <h1 class="text-3xl font-black text-navy-dark mb-10">{{ trans('cart.title') }}</h1>
+
+        {% if cart is defined and cart.items|length %}
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+
+                {# قائمة المنتجات في السلة #}
+                <div class="lg:col-span-2 space-y-5">
+                    {% for item in cart.items %}
+                    <div class="flex gap-5 p-5 bg-white rounded-3xl border border-neutral-100 shadow-sm transition-all hover:shadow-md" data-item-id="{{ item.id }}">
+                        {# صورة المنتج #}
+                        <div class="w-28 h-28 rounded-2xl overflow-hidden shrink-0 bg-soft-white">
+                            <a href="{{ item.product.url }}">
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-full h-full object-cover">
+                            </a>
+                        </div>
+
+                        {# تفاصيل المنتج #}
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between gap-2 mb-2">
+                                <h3 class="font-bold text-navy-dark text-base line-clamp-2">
+                                    <a href="{{ item.product.url }}" class="hover:text-gold transition-colors">{{ item.product.name }}</a>
+                                </h3>
+                                <button salla-cart-remove="{{ item.id }}"
+                                    class="shrink-0 w-8 h-8 text-gray-300 hover:text-red-500 transition-colors flex items-center justify-center">
+                                    <i data-lucide="x" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            {% if item.options is defined and item.options|length %}
+                                <div class="text-xs text-gray-400 mb-3">
+                                    {% for option in item.options %}
+                                        <span>{{ option.name }}: <strong>{{ option.value }}</strong></span>{% if not loop.last %} &nbsp;|&nbsp; {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                {# الكمية #}
+                                <div class="flex items-center border border-gray-200 rounded-2xl overflow-hidden">
+                                    <button salla-cart-update="{{ item.id }}" data-action="decrease"
+                                        class="w-10 h-10 flex items-center justify-center text-navy-dark hover:bg-gray-50 transition-colors">
+                                        <i data-lucide="minus" class="w-4 h-4"></i>
+                                    </button>
+                                    <span class="w-10 text-center font-black text-navy-dark">{{ item.quantity }}</span>
+                                    <button salla-cart-update="{{ item.id }}" data-action="increase"
+                                        class="w-10 h-10 flex items-center justify-center text-navy-dark hover:bg-gray-50 transition-colors">
+                                        <i data-lucide="plus" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+
+                                {# السعر #}
+                                <div class="text-right">
+                                    <span class="text-navy-dark font-black text-lg">{{ item.total|money }}</span>
+                                    {% if item.product.on_sale %}
+                                        <span class="block text-xs text-gray-300 line-through">{{ (item.product.regular_price * item.quantity)|money }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {# ملخص الطلب #}
+                <div class="lg:col-span-1 lg:sticky lg:top-32">
+                    <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-8">
+                        <h2 class="text-xl font-black text-navy-dark mb-6 pb-4 border-b border-gray-100">{{ trans('cart.order_summary') }}</h2>
+
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-500">{{ trans('common.elements.subtotal') }}</span>
+                                <span class="font-bold text-navy-dark">{{ cart.subtotal|money }}</span>
+                            </div>
+                            {% if cart.shipping is defined %}
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-500">{{ trans('common.elements.shipping') }}</span>
+                                <span class="font-bold text-navy-dark">{{ cart.shipping|money }}</span>
+                            </div>
+                            {% endif %}
+                            {% if cart.discount is defined and cart.discount > 0 %}
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-green-600">{{ trans('common.elements.discount') }}</span>
+                                <span class="font-bold text-green-600">-{{ cart.discount|money }}</span>
+                            </div>
+                            {% endif %}
+                            {% if cart.tax is defined and cart.tax > 0 %}
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-500">{{ trans('common.elements.tax') }}</span>
+                                <span class="font-bold text-navy-dark">{{ cart.tax|money }}</span>
+                            </div>
+                            {% endif %}
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                                <span class="font-black text-navy-dark">{{ trans('common.elements.total') }}</span>
+                                <span class="font-black text-navy-dark text-2xl">{{ cart.total|money }}</span>
+                            </div>
+                        </div>
+
+                        {# حقل الكوبون #}
+                        <form salla-coupon class="flex gap-2 mb-6">
+                            <input type="text" name="coupon" placeholder="{{ trans('cart.coupon_placeholder') }}"
+                                class="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors">
+                            <button type="submit" class="px-5 py-3 bg-navy-dark text-white rounded-xl text-sm font-bold hover:bg-gold transition-all">
+                                {{ trans('cart.apply_coupon') }}
+                            </button>
+                        </form>
+
+                        {# زر الدفع #}
+                        <a href="{{ link('checkout') }}"
+                            class="block w-full bg-gold text-white py-5 rounded-2xl font-black text-center text-lg hover:bg-navy-dark transition-all duration-500 shadow-xl shadow-gold/20 mb-4">
+                            {{ trans('common.elements.checkout') }}
+                        </a>
+                        <a href="{{ link('/') }}"
+                            class="block w-full bg-gray-50 text-navy-dark py-4 rounded-2xl font-bold text-center text-sm hover:bg-gray-100 transition-all">
+                            {{ trans('common.elements.continue_shopping') }}
+                        </a>
+
+                        {# طرق الدفع #}
+                        <div class="mt-6 flex items-center justify-center gap-3 opacity-40">
+                            <img src="https://salla.sa/assets/images/payment/mada.png" alt="Mada" class="h-5">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard" class="h-6">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" class="h-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% else %}
+            {# سلة فارغة #}
+            <div class="text-center py-24">
+                <div class="w-28 h-28 bg-gray-50 border border-gray-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <i data-lucide="shopping-cart" class="w-12 h-12 text-gray-300"></i>
+                </div>
+                <h2 class="text-2xl font-black text-navy-dark mb-3">{{ trans('common.elements.empty_cart') }}</h2>
+                <p class="text-gray-400 mb-8 max-w-xs mx-auto">{{ trans('common.elements.empty_cart_msg') }}</p>
+                <a href="{{ link('/') }}"
+                    class="inline-flex items-center gap-3 bg-gold text-white px-10 py-5 rounded-2xl font-bold hover:bg-navy-dark transition-all duration-500 shadow-xl shadow-gold/20">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    {{ trans('common.elements.start_shopping') }}
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

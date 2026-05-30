@@ -1,0 +1,37 @@
+{
+  "name": "luxury-store",
+  "version": "2.0.0",
+  "description": "ثيم متجر الفخامة - Luxury Store Premium Salla Theme",
+  "author": "Luxury Store",
+  "homepage": "",
+  "thumbnail": "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800",
+  "colors": {
+    "primary":    "#D4AF37",
+    "secondary":  "#0F172A",
+    "background": "#F8FAFC",
+    "text":       "#111827"
+  },
+  "support_rtl": true,
+  "support_ltr": true,
+  "compatibility": {
+    "salla": ">=2.0.0"
+  },
+  "pages": {
+    "index":        "views/pages/index.twig",
+    "product":      "views/pages/product.twig",
+    "category":     "views/pages/category.twig",
+    "cart":         "views/pages/cart.twig",
+    "search":       "views/pages/search.twig",
+    "blog":         "views/pages/blog.twig",
+    "blog.single":  "views/pages/blog.single.twig",
+    "brands":       "views/pages/brands.twig",
+    "brands.single":"views/pages/brands.single.twig",
+    "offers":       "views/pages/offers.twig",
+    "page":         "views/pages/page.twig",
+    "error":        "views/pages/error.twig"
+  },
+  "assets": {
+    "css": "dist/style.css",
+    "js":  "dist/main.js"
+  }
+}

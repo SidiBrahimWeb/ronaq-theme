@@ -1,0 +1,220 @@
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+    {# 1. معرض صور المنتج #}
+    <div class="lg:col-span-7 space-y-4">
+        <div class="swiper product-gallery-swiper rounded-[2rem] overflow-hidden border border-neutral-100 bg-soft-white group relative">
+            <div class="swiper-wrapper">
+                {% if product.images is defined and product.images|length %}
+                    {% for image in product.images %}
+                        <div class="swiper-slide cursor-zoom-in">
+                            <img src="{{ image.url }}" alt="{{ image.alt|default(product.name) }}"
+                                class="w-full aspect-square object-cover" loading="lazy">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="swiper-slide">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                            class="w-full aspect-square object-cover">
+                    </div>
+                {% endif %}
+            </div>
+            {# أزرار التنقل #}
+            <button class="gallery-prev absolute top-1/2 right-5 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur-md shadow-lg flex items-center justify-center text-navy-dark hover:bg-gold hover:text-white transition-all z-10 opacity-0 group-hover:opacity-100"
+                aria-label="السابق">
+                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+            <button class="gallery-next absolute top-1/2 left-5 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur-md shadow-lg flex items-center justify-center text-navy-dark hover:bg-gold hover:text-white transition-all z-10 opacity-0 group-hover:opacity-100"
+                aria-label="التالي">
+                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        {# الصور المصغرة #}
+        {% if product.images is defined and product.images|length > 1 %}
+        <div class="swiper product-thumbs-swiper">
+            <div class="swiper-wrapper">
+                {% for image in product.images %}
+                    <div class="swiper-slide cursor-pointer rounded-xl overflow-hidden aspect-square border-2 border-transparent hover:border-gold transition-colors opacity-60 hover:opacity-100">
+                        <img src="{{ image.url }}" alt="{{ image.alt|default(product.name) }}"
+                            class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    {# 2. معلومات المنتج الثابتة #}
+    <div class="lg:col-span-5 lg:sticky lg:top-32 space-y-7">
+        <div>
+            <div class="flex items-center flex-wrap gap-3 mb-4">
+                {% if product.promotion_title is defined and product.promotion_title %}
+                    <span class="bg-gold/10 text-gold text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-gold/20">
+                        {{ product.promotion_title }}
+                    </span>
+                {% endif %}
+                {% if product.rating is defined and product.rating %}
+                    <div class="flex items-center gap-1">
+                        {% for i in 1..5 %}
+                            <i data-lucide="star" class="w-4 h-4 text-gold {% if i <= product.rating %}fill-current{% endif %}"></i>
+                        {% endfor %}
+                        <span class="text-sm font-black text-navy-dark mr-1">{{ product.rating }}</span>
+                        {% if product.reviews_count is defined %}
+                            <span class="text-xs text-gray-400 font-bold">({{ product.reviews_count }} مراجعة)</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <h1 class="text-2xl lg:text-3xl font-black text-navy-dark leading-tight mb-4">{{ product.name }}</h1>
+
+            {# الرمز SKU #}
+            {% if product.sku is defined and product.sku %}
+                <p class="text-xs text-gray-400 mb-3">
+                    <span class="font-bold">{{ trans('products.labels.sku') }}:</span> {{ product.sku }}
+                </p>
+            {% endif %}
+
+            {# السعر #}
+            <div class="flex items-center flex-wrap gap-3">
+                <span class="text-3xl font-black text-navy-dark">{{ product.price|money }}</span>
+                {% if product.on_sale %}
+                    <span class="text-lg text-gray-300 line-through">{{ product.regular_price|money }}</span>
+                    <span class="bg-red-50 text-red-600 text-xs font-black px-3 py-1 rounded-full border border-red-100">
+                        وفر {{ product.discount_percentage }}%
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+
+        {# الوصف القصير #}
+        {% if product.short_description is defined and product.short_description %}
+            <p class="text-neutral-500 leading-relaxed">{{ product.short_description }}</p>
+        {% elseif product.description is defined and product.description %}
+            <p class="text-neutral-500 leading-relaxed line-clamp-3">{{ product.description|striptags|slice(0, 200) }}...</p>
+        {% endif %}
+
+        {# 3. خيارات المنتج (الألوان / المقاسات) #}
+        {% if product.options is defined and product.options|length %}
+            <div class="space-y-5">
+                {% for option in product.options %}
+                    <div class="space-y-3">
+                        <label class="text-sm font-black text-navy-dark uppercase tracking-widest">{{ option.name }}</label>
+                        <div class="flex flex-wrap gap-2">
+                            {% for value in option.values %}
+                                <button
+                                    class="px-5 py-2.5 rounded-xl border-2 transition-all font-bold text-sm {% if loop.first %}border-gold text-gold bg-gold/5{% else %}border-gray-100 text-gray-400 hover:border-gold hover:text-gold{% endif %}"
+                                    data-option-id="{{ option.id }}"
+                                    data-value-id="{{ value.id }}">
+                                    {{ value.name }}
+                                </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {# 4. اختيار الكمية #}
+        <div class="space-y-3">
+            <label for="product-quantity" class="text-sm font-black text-navy-dark uppercase tracking-widest">
+                {{ trans('common.elements.quantity') }}
+            </label>
+            <div class="flex items-center gap-5 flex-wrap">
+                <div class="quantity-selector flex items-center bg-gray-50 rounded-2xl p-1 border border-gray-100">
+                    <button class="minus w-11 h-11 rounded-xl flex items-center justify-center hover:bg-white hover:shadow-md transition-all text-navy-dark" type="button" aria-label="تقليل">
+                        <i data-lucide="minus" class="w-4 h-4"></i>
+                    </button>
+                    <input type="number" id="product-quantity" name="quantity"
+                        value="1" min="1" max="{{ product.max_quantity|default(100) }}"
+                        class="w-12 text-center bg-transparent font-black text-lg focus:outline-none">
+                    <button class="plus w-11 h-11 rounded-xl flex items-center justify-center hover:bg-white hover:shadow-md transition-all text-navy-dark" type="button" aria-label="زيادة">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                {# حالة التوفر #}
+                {% if product.is_available %}
+                    <div class="flex items-center gap-2 text-xs font-bold text-green-600">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        {{ trans('products.status.available') }}
+                    </div>
+                {% else %}
+                    <div class="flex items-center gap-2 text-xs font-bold text-red-500">
+                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                        {{ trans('products.status.out_of_stock') }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {# 5. أزرار الإجراءات #}
+        <div class="flex flex-col gap-3">
+            <div class="flex gap-3">
+                <button salla-cart-add="{{ product.id }}"
+                    class="flex-1 bg-navy-dark text-white py-4 rounded-2xl font-black text-base hover:bg-gold transition-all duration-500 flex items-center justify-center gap-3 shadow-lg shadow-navy-dark/10">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span>{{ trans('common.elements.add_to_cart') }}</span>
+                </button>
+                <button salla-wishlist-add="{{ product.id }}"
+                    aria-label="{{ trans('common.elements.add_to_wishlist') }}"
+                    class="w-14 bg-gray-50 border-2 border-gray-100 rounded-2xl flex items-center justify-center text-navy-dark hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition-all">
+                    <i data-lucide="heart" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <button salla-buy-now="{{ product.id }}"
+                class="w-full bg-gold text-white py-4 rounded-2xl font-black text-base hover:bg-navy-dark transition-all duration-500 shadow-xl shadow-gold/20">
+                {{ trans('common.elements.buy_now') }}
+            </button>
+        </div>
+
+        {# 6. ضمانات وعروض الشحن #}
+        <div class="grid grid-cols-2 gap-4 p-5 bg-soft-white rounded-2xl border border-neutral-100">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm shrink-0">
+                    <i data-lucide="truck" class="w-5 h-5 text-gold"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black text-navy-dark">شحن مجاني</h4>
+                    <p class="text-[10px] text-gray-400">للطلبات فوق 500 ريال</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm shrink-0">
+                    <i data-lucide="rotate-ccw" class="w-5 h-5 text-gold"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black text-navy-dark">استرجاع سهل</h4>
+                    <p class="text-[10px] text-gray-400">خلال 7 أيام عمل</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm shrink-0">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-gold"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black text-navy-dark">دفع آمن</h4>
+                    <p class="text-[10px] text-gray-400">تشفير SSL 256-bit</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm shrink-0">
+                    <i data-lucide="headphones" class="w-5 h-5 text-gold"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black text-navy-dark">دعم 24/7</h4>
+                    <p class="text-[10px] text-gray-400">نحن هنا لمساعدتك</p>
+                </div>
+            </div>
+        </div>
+
+        {# طرق الدفع #}
+        <div class="flex items-center justify-between gap-4 pt-4 border-t border-gray-100">
+            <span class="text-xs font-bold text-gray-400">دفع آمن عبر:</span>
+            <div class="flex items-center gap-3 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <img src="https://salla.sa/assets/images/payment/mada.png" alt="Mada" class="h-4" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard" class="h-5" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" class="h-3" loading="lazy">
+            </div>
+        </div>
+    </div>
+</div>

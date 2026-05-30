@@ -1,0 +1,145 @@
+<div id="mobile-sidebar" class="fixed inset-0 z-[60] invisible overflow-hidden" role="dialog" aria-modal="true" aria-label="قائمة التنقل">
+    {# خلفية شفافة #}
+    <div id="mobile-overlay"
+        class="absolute inset-0 bg-navy-dark/60 backdrop-blur-sm opacity-0 transition-opacity duration-500"></div>
+
+    {# لوحة القائمة #}
+    <div id="mobile-panel"
+        class="absolute inset-y-0 right-0 w-[85vw] max-w-sm bg-white shadow-2xl translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+
+        {# رأس القائمة #}
+        <div class="flex items-center justify-between p-6 border-b border-gray-100">
+            <a href="{{ link('/') }}" class="text-xl font-black text-navy-dark">
+                {% if store.logo %}
+                    <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-8 object-contain">
+                {% else %}
+                    <span class="text-gold">{{ store.name|slice(0,3)|upper }}</span>{{ store.name|slice(3)|upper }}<span class="text-gold">.</span>
+                {% endif %}
+            </a>
+            <button id="close-mobile-menu" aria-label="إغلاق القائمة"
+                class="p-2 text-navy-dark hover:text-gold hover:bg-gold/10 rounded-xl transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        {# حقل البحث #}
+        <div class="px-6 py-4 border-b border-gray-100">
+            <form action="{{ link('search') }}" method="GET" role="search" class="relative">
+                <input type="text" name="q" placeholder="{{ trans('common.elements.search_placeholder') }}"
+                    aria-label="{{ trans('common.elements.search') }}"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 pr-11 focus:outline-none focus:border-gold text-sm transition-colors">
+                <i data-lucide="search" class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+            </form>
+        </div>
+
+        {# قائمة التنقل #}
+        <nav class="flex-1 overflow-y-auto px-6 py-4">
+            <ul class="space-y-1" role="list">
+                <li>
+                    <a href="{{ link('/') }}"
+                        class="flex items-center justify-between py-3 px-4 rounded-xl font-bold text-navy-dark hover:bg-gold/5 hover:text-gold transition-all group">
+                        <span class="flex items-center gap-3">
+                            <i data-lucide="home" class="w-5 h-5 text-gray-400 group-hover:text-gold transition-colors"></i>
+                            {{ trans('common.elements.home') }}
+                        </span>
+                        <i data-lucide="chevron-left" class="w-4 h-4 text-gray-300"></i>
+                    </a>
+                </li>
+
+                {% for category in categories %}
+                    {% if category.sub_categories is defined and category.sub_categories|length %}
+                        <li class="mobile-dropdown">
+                            <button
+                                class="w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold text-navy-dark hover:bg-gold/5 hover:text-gold transition-all group">
+                                <span class="flex items-center gap-3">
+                                    <i data-lucide="grid" class="w-5 h-5 text-gray-400 group-hover:text-gold transition-colors"></i>
+                                    {{ category.name }}
+                                </span>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-gray-300 transition-transform duration-300"></i>
+                            </button>
+                            <ul class="hidden mt-1 mr-8 space-y-1 bg-gray-50 rounded-xl p-3">
+                                <li>
+                                    <a href="{{ category.url }}" class="block py-2 px-4 text-sm text-gray-600 hover:text-gold rounded-lg hover:bg-white transition-all font-bold">
+                                        جميع {{ category.name }}
+                                    </a>
+                                </li>
+                                {% for sub in category.sub_categories %}
+                                    <li>
+                                        <a href="{{ sub.url }}" class="block py-2 px-4 text-sm text-gray-500 hover:text-gold rounded-lg hover:bg-white transition-all">
+                                            {{ sub.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ category.url }}"
+                                class="flex items-center justify-between py-3 px-4 rounded-xl font-bold text-navy-dark hover:bg-gold/5 hover:text-gold transition-all group">
+                                <span class="flex items-center gap-3">
+                                    <i data-lucide="grid" class="w-5 h-5 text-gray-400 group-hover:text-gold transition-colors"></i>
+                                    {{ category.name }}
+                                </span>
+                                <i data-lucide="chevron-left" class="w-4 h-4 text-gray-300"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                <li>
+                    <a href="{{ link('offers') }}"
+                        class="flex items-center justify-between py-3 px-4 rounded-xl font-bold text-red-600 hover:bg-red-50 transition-all group">
+                        <span class="flex items-center gap-3">
+                            <i data-lucide="tag" class="w-5 h-5"></i>
+                            {{ trans('common.elements.offers') }}
+                            <span class="bg-red-600 text-white text-[9px] px-1.5 py-0.5 rounded-full">جديد</span>
+                        </span>
+                        <i data-lucide="chevron-left" class="w-4 h-4 text-red-300"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ link('about-us') }}"
+                        class="flex items-center justify-between py-3 px-4 rounded-xl font-bold text-navy-dark hover:bg-gold/5 hover:text-gold transition-all group">
+                        <span class="flex items-center gap-3">
+                            <i data-lucide="info" class="w-5 h-5 text-gray-400 group-hover:text-gold transition-colors"></i>
+                            {{ trans('common.elements.about_us') }}
+                        </span>
+                        <i data-lucide="chevron-left" class="w-4 h-4 text-gray-300"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ link('contact') }}"
+                        class="flex items-center justify-between py-3 px-4 rounded-xl font-bold text-navy-dark hover:bg-gold/5 hover:text-gold transition-all group">
+                        <span class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-gray-400 group-hover:text-gold transition-colors"></i>
+                            {{ trans('common.elements.contact_us') }}
+                        </span>
+                        <i data-lucide="chevron-left" class="w-4 h-4 text-gray-300"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        {# ذيل القائمة - أزرار الحساب #}
+        <div class="p-6 border-t border-gray-100 space-y-3">
+            {% if user.is_authenticated %}
+                <a href="{{ link('profile') }}"
+                    class="flex items-center justify-center gap-3 bg-navy-dark text-white py-4 rounded-xl font-bold hover:bg-gold transition-all duration-300">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                    {{ trans('common.elements.my_account') }}
+                </a>
+            {% else %}
+                <a href="{{ link('login') }}"
+                    class="flex items-center justify-center gap-3 bg-navy-dark text-white py-4 rounded-xl font-bold hover:bg-gold transition-all duration-300">
+                    <i data-lucide="log-in" class="w-5 h-5"></i>
+                    {{ trans('common.elements.login') }}
+                </a>
+                <a href="{{ link('register') }}"
+                    class="flex items-center justify-center gap-3 bg-gray-100 text-navy-dark py-4 rounded-xl font-bold hover:bg-gold/10 transition-all duration-300">
+                    <i data-lucide="user-plus" class="w-5 h-5"></i>
+                    {{ trans('common.elements.register') }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

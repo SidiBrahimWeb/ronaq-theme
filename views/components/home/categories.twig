@@ -1,0 +1,29 @@
+{% if categories is defined and categories|length %}
+<section class="py-16 bg-white" aria-label="التصنيفات">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-black text-navy-dark">{{ trans('common.elements.all_categories') }}</h2>
+            <div class="w-12 h-1 bg-gold rounded-full mx-auto mt-3"></div>
+        </div>
+        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 lg:gap-8">
+            {% for category in categories %}
+            <a href="{{ category.url }}" class="group text-center">
+                <div class="w-20 h-20 lg:w-28 lg:h-28 mx-auto mb-3 rounded-full bg-soft-white border-2 border-transparent flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-110 group-hover:border-gold group-hover:shadow-xl group-hover:shadow-gold/20">
+                    {% if category.image is defined and category.image %}
+                        <img src="{{ category.image.url|default(category.image) }}" alt="{{ category.name }}"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                            loading="lazy">
+                    {% else %}
+                        <i data-lucide="grid" class="w-8 h-8 text-gray-300 group-hover:text-gold transition-colors"></i>
+                    {% endif %}
+                </div>
+                <h3 class="font-bold text-sm text-navy-dark group-hover:text-gold transition-colors line-clamp-1">{{ category.name }}</h3>
+                {% if category.products_count is defined %}
+                    <p class="text-xs text-gray-400 mt-0.5">{{ category.products_count }} منتج</p>
+                {% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}

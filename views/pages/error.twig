@@ -1,0 +1,49 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="py-20 min-h-[70vh] flex items-center">
+    <div class="container mx-auto px-4 text-center">
+
+        {# رقم الخطأ #}
+        <div class="relative mb-8 inline-block">
+            <span class="text-[10rem] font-black text-gray-100 leading-none select-none">
+                {{ error.code|default('404') }}
+            </span>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center">
+                    <i data-lucide="{% if error.code == 404 %}compass{% else %}alert-triangle{% endif %}" class="w-10 h-10 text-gold"></i>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="text-3xl font-black text-navy-dark mb-4">
+            {% if error.code == 404 %}
+                {{ trans('errors.404_title') }}
+            {% else %}
+                {{ trans('errors.general_title') }}
+            {% endif %}
+        </h1>
+        <p class="text-gray-500 max-w-md mx-auto mb-10 text-lg leading-relaxed">
+            {% if error.code == 404 %}
+                {{ trans('errors.404_msg') }}
+            {% else %}
+                {{ trans('errors.general_msg') }}
+            {% endif %}
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="{{ link('/') }}"
+                class="inline-flex items-center gap-3 bg-navy-dark text-white px-8 py-5 rounded-2xl font-bold hover:bg-gold transition-all duration-500 shadow-xl">
+                <i data-lucide="home" class="w-5 h-5"></i>
+                {{ trans('errors.back_home') }}
+            </a>
+            <button onclick="window.history.back()"
+                class="inline-flex items-center gap-3 bg-white border-2 border-gray-200 text-navy-dark px-8 py-5 rounded-2xl font-bold hover:border-gold hover:text-gold transition-all duration-500">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                الصفحة السابقة
+            </button>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

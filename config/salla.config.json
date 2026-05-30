@@ -1,0 +1,25 @@
+{
+  "name": "luxury-store",
+  "description": "ثيم متجر الفخامة - Luxury Store Theme",
+  "version": "1.0.0",
+  "author": "Luxury Store",
+  "thumbnail": "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800",
+  "main_color": "#D4AF37",
+  "support_rtl": true,
+  "support_ltr": true,
+  "fonts": [
+    {
+      "name": "Cairo",
+      "url": "https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap"
+    }
+  ],
+  "colors": {
+    "primary": "#D4AF37",
+    "secondary": "#0F172A",
+    "background": "#F8FAFC",
+    "text": "#111827"
+  },
+  "compatibility": {
+    "salla_api": ">=2.0.0"
+  }
+}

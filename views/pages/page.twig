@@ -1,0 +1,35 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="py-10 lg:py-16 min-h-[60vh]">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+
+            {# رأس الصفحة #}
+            <header class="mb-10 pb-8 border-b border-gray-100">
+                <h1 class="text-3xl lg:text-4xl font-black text-navy-dark mb-4">{{ page.title }}</h1>
+                {% if page.created_at is defined %}
+                    <p class="text-sm text-gray-400">
+                        <i data-lucide="calendar" class="w-4 h-4 inline-block ml-1 text-gold"></i>
+                        {{ page.created_at|date("Y/m/d") }}
+                    </p>
+                {% endif %}
+            </header>
+
+            {# صورة الصفحة #}
+            {% if page.image is defined and page.image %}
+                <div class="rounded-3xl overflow-hidden mb-10 shadow-xl">
+                    <img src="{{ page.image.url|default(page.image) }}" alt="{{ page.title }}"
+                        class="w-full aspect-[16/7] object-cover">
+                </div>
+            {% endif %}
+
+            {# محتوى الصفحة #}
+            <div class="prose prose-lg max-w-none text-neutral-600 leading-loose">
+                {{ page.content|raw }}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

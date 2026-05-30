@@ -1,0 +1,196 @@
+{
+  "sections": [
+    {
+      "id": "announcement",
+      "name": "شريط الإعلانات",
+      "icon": "megaphone",
+      "settings": [
+        {
+          "id": "show_announcement",
+          "type": "checkbox",
+          "label": "إظهار شريط الإعلانات",
+          "default": true
+        },
+        {
+          "id": "announcement_text",
+          "type": "text",
+          "label": "نص الإعلان",
+          "default": "شحن مجاني للطلبات أكثر من 500 ريال | استخدم كود GOLD20 لخصم 20%"
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "name": "البانر الرئيسي",
+      "icon": "image",
+      "settings": [
+        {
+          "id": "hero_image",
+          "type": "image",
+          "label": "صورة البانر الرئيسي",
+          "default": "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=2000"
+        },
+        {
+          "id": "hero_subtitle",
+          "type": "text",
+          "label": "العنوان الفرعي",
+          "default": "مجموعة الحصرية"
+        },
+        {
+          "id": "hero_title",
+          "type": "textarea",
+          "label": "العنوان الرئيسي",
+          "default": "فخامة التفاصيل تعكس شخصيتك"
+        },
+        {
+          "id": "hero_description",
+          "type": "textarea",
+          "label": "الوصف",
+          "default": "اكتشف تشكيلة واسعة من أرقى العطور والمجوهرات التي صممت خصيصاً لأصحاب الذوق الرفيع."
+        },
+        {
+          "id": "hero_button_text",
+          "type": "text",
+          "label": "نص الزر الأول",
+          "default": "تسوق الآن"
+        },
+        {
+          "id": "hero_button_link",
+          "type": "url",
+          "label": "رابط الزر الأول",
+          "default": "/"
+        },
+        {
+          "id": "hero_secondary_button_text",
+          "type": "text",
+          "label": "نص الزر الثاني",
+          "default": "اكتشف المزيد"
+        },
+        {
+          "id": "hero_secondary_button_link",
+          "type": "url",
+          "label": "رابط الزر الثاني",
+          "default": "#"
+        }
+      ]
+    },
+    {
+      "id": "featured_products",
+      "name": "المنتجات المميزة",
+      "icon": "star",
+      "settings": [
+        {
+          "id": "featured_products_subtitle",
+          "type": "text",
+          "label": "العنوان الفرعي",
+          "default": "مجموعتنا الجديدة"
+        },
+        {
+          "id": "featured_products_title",
+          "type": "text",
+          "label": "العنوان الرئيسي",
+          "default": "وصل حديثاً"
+        }
+      ]
+    },
+    {
+      "id": "promo_banners",
+      "name": "بانرات العروض",
+      "icon": "tag",
+      "settings": [
+        {
+          "id": "promo_banner_1_image",
+          "type": "image",
+          "label": "صورة البانر الأول",
+          "default": "https://images.unsplash.com/photo-1512132411229-c30391241dd8?auto=format&fit=crop&q=80&w=1000"
+        },
+        {
+          "id": "promo_banner_1_title",
+          "type": "text",
+          "label": "عنوان البانر الأول",
+          "default": "قسم الساعات الفاخرة"
+        },
+        {
+          "id": "promo_banner_1_subtitle",
+          "type": "text",
+          "label": "وصف البانر الأول",
+          "default": "خصومات تصل إلى 40%"
+        },
+        {
+          "id": "promo_banner_1_btn_text",
+          "type": "text",
+          "label": "نص زر البانر الأول",
+          "default": "تسوق الآن"
+        },
+        {
+          "id": "promo_banner_1_link",
+          "type": "url",
+          "label": "رابط البانر الأول",
+          "default": "#"
+        },
+        {
+          "id": "promo_banner_2_image",
+          "type": "image",
+          "label": "صورة البانر الثاني",
+          "default": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&q=80&w=1000"
+        },
+        {
+          "id": "promo_banner_2_title",
+          "type": "text",
+          "label": "عنوان البانر الثاني",
+          "default": "أطقم المجوهرات النادرة"
+        },
+        {
+          "id": "promo_banner_2_subtitle",
+          "type": "text",
+          "label": "وصف البانر الثاني",
+          "default": "تصاميم فريدة تعكس أناقتك"
+        },
+        {
+          "id": "promo_banner_2_btn_text",
+          "type": "text",
+          "label": "نص زر البانر الثاني",
+          "default": "اكتشف المجموعة"
+        },
+        {
+          "id": "promo_banner_2_link",
+          "type": "url",
+          "label": "رابط البانر الثاني",
+          "default": "#"
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "name": "الفوتر",
+      "icon": "layout",
+      "settings": [
+        {
+          "id": "footer_about",
+          "type": "textarea",
+          "label": "نص عن المتجر",
+          "default": "نحن نؤمن بأن الفخامة ليست مجرد مظهر، بل هي تجربة تعيشها في كل تفاصيل حياتك."
+        }
+      ]
+    },
+    {
+      "id": "colors",
+      "name": "الألوان",
+      "icon": "palette",
+      "settings": [
+        {
+          "id": "primary_color",
+          "type": "color",
+          "label": "اللون الرئيسي (الذهبي)",
+          "default": "#D4AF37"
+        },
+        {
+          "id": "secondary_color",
+          "type": "color",
+          "label": "اللون الثانوي (الكحلي)",
+          "default": "#0F172A"
+        }
+      ]
+    }
+  ]
+}

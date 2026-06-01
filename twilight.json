@@ -1,383 +1,340 @@
 {
-  "name": {
-    "ar": "ثيم الفخامة - Ronaq",
-    "en": "Luxury Store Theme - Ronaq"
-  },
-  "description": {
-    "ar": "ثيم متجر فاخر احترافي مصمم للمتاجر الراقية بتصميم عصري وعربي أصيل",
-    "en": "A professional luxury store theme designed for high-end stores with a modern and elegant Arabic design"
-  },
-  "version": "2.0.0",
-  "repository": "",
-  "author_email": "",
-  "support_url": "",
-  "features": [
-    "mega-menu",
-    "fonts",
-    "color",
-    "breadcrumb"
-  ],
-  "settings": {
-    "announcement": {
-      "type": "section",
-      "name": {
-        "ar": "شريط الإعلانات",
-        "en": "Announcement Bar"
-      },
-      "icon": "megaphone",
-      "settings": {
-        "show_announcement": {
-          "type": "checkbox",
-          "label": {
-            "ar": "إظهار شريط الإعلانات",
-            "en": "Show Announcement Bar"
-          },
-          "default": true
+    "name": {
+        "ar": "ثيم الفخامة - Ronaq",
+        "en": "Luxury Store - Ronaq Theme"
+    },
+    "repository": "https://github.com/SidiBrahimWeb/ronaq-theme",
+    "author_email": "",
+    "features": [
+        "mega-menu",
+        "fonts",
+        "color",
+        "breadcrumb"
+    ],
+    "settings": [
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label-announcement",
+            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات شريط الإعلانات</h6></div>",
+            "variant": "h6"
         },
-        "announcement_text": {
-          "type": "text",
-          "label": {
-            "ar": "نص الإعلان",
-            "en": "Announcement Text"
-          },
-          "default": {
-            "ar": "شحن مجاني للطلبات أكثر من 500 ريال | استخدم كود GOLD20 لخصم 20%",
-            "en": "Free shipping on orders over 500 SAR | Use code GOLD20 for 20% off"
-          },
-          "multilanguage": true
+        {
+            "type": "boolean",
+            "id": "show_announcement",
+            "label": "إظهار شريط الإعلانات",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "string",
+            "id": "announcement_text",
+            "label": "نص الإعلان",
+            "format": "text",
+            "required": false,
+            "value": "شحن مجاني للطلبات أكثر من 500 ريال | استخدم كود GOLD20 لخصم 20%"
+        },
+        {
+            "type": "static",
+            "id": "static-line-1",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label-header",
+            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات الهيدر</h6></div>",
+            "variant": "h6"
+        },
+        {
+            "type": "boolean",
+            "id": "header_is_sticky",
+            "label": "تثبيت القائمة الرئيسية أعلى الصفحة عند التمرير",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "static",
+            "id": "static-line-2",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label-colors",
+            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات الألوان</h6></div>",
+            "variant": "h6"
+        },
+        {
+            "type": "string",
+            "id": "primary_color",
+            "label": "اللون الرئيسي (الذهبي)",
+            "format": "color",
+            "required": false,
+            "value": "#D4AF37"
+        },
+        {
+            "type": "string",
+            "id": "secondary_color",
+            "label": "اللون الثانوي (الكحلي)",
+            "format": "color",
+            "required": false,
+            "value": "#0F172A"
+        },
+        {
+            "type": "static",
+            "id": "static-line-3",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label-footer",
+            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات الفوتر</h6></div>",
+            "variant": "h6"
+        },
+        {
+            "type": "boolean",
+            "id": "footer_is_dark",
+            "label": "الفوتر بالوضع الداكن",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "string",
+            "id": "footer_about",
+            "label": "نص عن المتجر في الفوتر",
+            "format": "textarea",
+            "required": false,
+            "value": "نحن نؤمن بأن الفخامة ليست مجرد مظهر، بل هي تجربة تعيشها في كل تفاصيل حياتك."
         }
-      }
-    },
-    "hero": {
-      "type": "section",
-      "name": {
-        "ar": "البانر الرئيسي",
-        "en": "Hero Banner"
-      },
-      "icon": "image",
-      "settings": {
-        "hero_image": {
-          "type": "image",
-          "label": {
-            "ar": "صورة البانر الرئيسي",
-            "en": "Hero Banner Image"
-          }
+    ],
+    "components": [
+        {
+            "key": "1ff2c38d-6336-42c9-9276-afb9227de9a0",
+            "title": {
+                "ar": "البانر الرئيسي",
+                "en": "Hero Banner"
+            },
+            "icon": "sicon-photos-slider",
+            "path": "home.hero",
+            "fields": [
+                {
+                    "type": "image",
+                    "id": "hero_image",
+                    "label": "صورة البانر الرئيسي",
+                    "description": "الأبعاد المثالية: 1920x800 بكسل",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "id": "hero_subtitle",
+                    "label": "العنوان الفرعي",
+                    "format": "text",
+                    "required": false,
+                    "value": "مجموعة الحصرية"
+                },
+                {
+                    "type": "string",
+                    "id": "hero_title",
+                    "label": "العنوان الرئيسي",
+                    "format": "textarea",
+                    "required": false,
+                    "value": "فخامة التفاصيل تعكس شخصيتك"
+                },
+                {
+                    "type": "string",
+                    "id": "hero_description",
+                    "label": "الوصف",
+                    "format": "textarea",
+                    "required": false,
+                    "value": "اكتشف تشكيلة واسعة من أرقى العطور والمجوهرات التي صممت خصيصاً لأصحاب الذوق الرفيع."
+                },
+                {
+                    "type": "string",
+                    "id": "hero_button_text",
+                    "label": "نص الزر الأول",
+                    "format": "text",
+                    "required": false,
+                    "value": "تسوق الآن"
+                },
+                {
+                    "type": "string",
+                    "id": "hero_button_link",
+                    "label": "رابط الزر الأول",
+                    "format": "text",
+                    "required": false,
+                    "value": "/"
+                },
+                {
+                    "type": "string",
+                    "id": "hero_secondary_button_text",
+                    "label": "نص الزر الثاني",
+                    "format": "text",
+                    "required": false,
+                    "value": "اكتشف المزيد"
+                },
+                {
+                    "type": "string",
+                    "id": "hero_secondary_button_link",
+                    "label": "رابط الزر الثاني",
+                    "format": "text",
+                    "required": false,
+                    "value": "#"
+                }
+            ]
         },
-        "hero_subtitle": {
-          "type": "text",
-          "label": {
-            "ar": "العنوان الفرعي",
-            "en": "Subtitle"
-          },
-          "default": {
-            "ar": "مجموعة الحصرية",
-            "en": "Exclusive Collection"
-          },
-          "multilanguage": true
+        {
+            "key": "b97f2a21-f190-4cbc-9258-2615bc83cc54",
+            "title": {
+                "ar": "التصنيفات السريعة",
+                "en": "Quick Categories"
+            },
+            "icon": "sicon-menu2",
+            "path": "home.categories",
+            "fields": []
         },
-        "hero_title": {
-          "type": "textarea",
-          "label": {
-            "ar": "العنوان الرئيسي",
-            "en": "Main Title"
-          },
-          "default": {
-            "ar": "فخامة التفاصيل تعكس شخصيتك",
-            "en": "The Luxury of Details Reflects Your Personality"
-          },
-          "multilanguage": true
+        {
+            "key": "e9ce94f6-9b31-4c91-9650-4506c4ee5e66",
+            "title": {
+                "ar": "المنتجات المميزة",
+                "en": "Featured Products"
+            },
+            "icon": "sicon-star",
+            "path": "home.featured-products",
+            "fields": [
+                {
+                    "type": "string",
+                    "id": "featured_products_subtitle",
+                    "label": "العنوان الفرعي",
+                    "format": "text",
+                    "required": false,
+                    "value": "مجموعتنا الجديدة"
+                },
+                {
+                    "type": "string",
+                    "id": "featured_products_title",
+                    "label": "العنوان الرئيسي",
+                    "format": "text",
+                    "required": false,
+                    "value": "وصل حديثاً"
+                }
+            ]
         },
-        "hero_description": {
-          "type": "textarea",
-          "label": {
-            "ar": "الوصف",
-            "en": "Description"
-          },
-          "default": {
-            "ar": "اكتشف تشكيلة واسعة من أرقى العطور والمجوهرات التي صممت خصيصاً لأصحاب الذوق الرفيع.",
-            "en": "Discover a wide collection of the finest perfumes and jewelry designed for those with refined taste."
-          },
-          "multilanguage": true
+        {
+            "key": "8617f0aa-75a1-41ba-a10c-292636b9c5d3",
+            "title": {
+                "ar": "بانرات العروض",
+                "en": "Promotional Banners"
+            },
+            "icon": "sicon-tag",
+            "path": "home.offers-banner",
+            "fields": [
+                {
+                    "type": "image",
+                    "id": "promo_banner_1_image",
+                    "label": "صورة البانر الأول",
+                    "description": "الأبعاد المثالية: 600x400 بكسل",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_1_title",
+                    "label": "عنوان البانر الأول",
+                    "format": "text",
+                    "required": false,
+                    "value": "قسم الساعات الفاخرة"
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_1_subtitle",
+                    "label": "وصف البانر الأول",
+                    "format": "text",
+                    "required": false,
+                    "value": "خصومات تصل إلى 40%"
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_1_btn_text",
+                    "label": "نص زر البانر الأول",
+                    "format": "text",
+                    "required": false,
+                    "value": "تسوق الآن"
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_1_link",
+                    "label": "رابط البانر الأول",
+                    "format": "text",
+                    "required": false,
+                    "value": "#"
+                },
+                {
+                    "type": "image",
+                    "id": "promo_banner_2_image",
+                    "label": "صورة البانر الثاني",
+                    "description": "الأبعاد المثالية: 600x400 بكسل",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_2_title",
+                    "label": "عنوان البانر الثاني",
+                    "format": "text",
+                    "required": false,
+                    "value": "أطقم المجوهرات النادرة"
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_2_subtitle",
+                    "label": "وصف البانر الثاني",
+                    "format": "text",
+                    "required": false,
+                    "value": "تصاميم فريدة تعكس أناقتك"
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_2_btn_text",
+                    "label": "نص زر البانر الثاني",
+                    "format": "text",
+                    "required": false,
+                    "value": "اكتشف المجموعة"
+                },
+                {
+                    "type": "string",
+                    "id": "promo_banner_2_link",
+                    "label": "رابط البانر الثاني",
+                    "format": "text",
+                    "required": false,
+                    "value": "#"
+                }
+            ]
         },
-        "hero_button_text": {
-          "type": "text",
-          "label": {
-            "ar": "نص الزر الأول",
-            "en": "First Button Text"
-          },
-          "default": {
-            "ar": "تسوق الآن",
-            "en": "Shop Now"
-          },
-          "multilanguage": true
+        {
+            "key": "2f8c3798-cab8-43e2-b79d-26c225d76f89",
+            "title": {
+                "ar": "من نحن",
+                "en": "About Us"
+            },
+            "icon": "sicon-info-circle",
+            "path": "home.about-us",
+            "fields": []
         },
-        "hero_button_link": {
-          "type": "url",
-          "label": {
-            "ar": "رابط الزر الأول",
-            "en": "First Button Link"
-          },
-          "default": "/"
-        },
-        "hero_secondary_button_text": {
-          "type": "text",
-          "label": {
-            "ar": "نص الزر الثاني",
-            "en": "Second Button Text"
-          },
-          "default": {
-            "ar": "اكتشف المزيد",
-            "en": "Discover More"
-          },
-          "multilanguage": true
-        },
-        "hero_secondary_button_link": {
-          "type": "url",
-          "label": {
-            "ar": "رابط الزر الثاني",
-            "en": "Second Button Link"
-          },
-          "default": "#"
+        {
+            "key": "5e3e4da3-52f8-4f47-a02d-11b87bdf7bdc",
+            "title": {
+                "ar": "الأسئلة الشائعة",
+                "en": "FAQ"
+            },
+            "icon": "sicon-help",
+            "path": "home.faq",
+            "fields": []
         }
-      }
-    },
-    "featured_products": {
-      "type": "section",
-      "name": {
-        "ar": "المنتجات المميزة",
-        "en": "Featured Products"
-      },
-      "icon": "star",
-      "settings": {
-        "featured_products_subtitle": {
-          "type": "text",
-          "label": {
-            "ar": "العنوان الفرعي",
-            "en": "Subtitle"
-          },
-          "default": {
-            "ar": "مجموعتنا الجديدة",
-            "en": "Our New Collection"
-          },
-          "multilanguage": true
-        },
-        "featured_products_title": {
-          "type": "text",
-          "label": {
-            "ar": "العنوان الرئيسي",
-            "en": "Main Title"
-          },
-          "default": {
-            "ar": "وصل حديثاً",
-            "en": "New Arrivals"
-          },
-          "multilanguage": true
-        }
-      }
-    },
-    "promo_banners": {
-      "type": "section",
-      "name": {
-        "ar": "بانرات العروض",
-        "en": "Promotional Banners"
-      },
-      "icon": "tag",
-      "settings": {
-        "promo_banner_1_image": {
-          "type": "image",
-          "label": {
-            "ar": "صورة البانر الأول",
-            "en": "First Banner Image"
-          }
-        },
-        "promo_banner_1_title": {
-          "type": "text",
-          "label": {
-            "ar": "عنوان البانر الأول",
-            "en": "First Banner Title"
-          },
-          "default": {
-            "ar": "قسم الساعات الفاخرة",
-            "en": "Luxury Watches Section"
-          },
-          "multilanguage": true
-        },
-        "promo_banner_1_subtitle": {
-          "type": "text",
-          "label": {
-            "ar": "وصف البانر الأول",
-            "en": "First Banner Description"
-          },
-          "default": {
-            "ar": "خصومات تصل إلى 40%",
-            "en": "Discounts up to 40%"
-          },
-          "multilanguage": true
-        },
-        "promo_banner_1_btn_text": {
-          "type": "text",
-          "label": {
-            "ar": "نص زر البانر الأول",
-            "en": "First Banner Button Text"
-          },
-          "default": {
-            "ar": "تسوق الآن",
-            "en": "Shop Now"
-          },
-          "multilanguage": true
-        },
-        "promo_banner_1_link": {
-          "type": "url",
-          "label": {
-            "ar": "رابط البانر الأول",
-            "en": "First Banner Link"
-          },
-          "default": "#"
-        },
-        "promo_banner_2_image": {
-          "type": "image",
-          "label": {
-            "ar": "صورة البانر الثاني",
-            "en": "Second Banner Image"
-          }
-        },
-        "promo_banner_2_title": {
-          "type": "text",
-          "label": {
-            "ar": "عنوان البانر الثاني",
-            "en": "Second Banner Title"
-          },
-          "default": {
-            "ar": "أطقم المجوهرات النادرة",
-            "en": "Rare Jewelry Sets"
-          },
-          "multilanguage": true
-        },
-        "promo_banner_2_subtitle": {
-          "type": "text",
-          "label": {
-            "ar": "وصف البانر الثاني",
-            "en": "Second Banner Description"
-          },
-          "default": {
-            "ar": "تصاميم فريدة تعكس أناقتك",
-            "en": "Unique designs reflecting your elegance"
-          },
-          "multilanguage": true
-        },
-        "promo_banner_2_btn_text": {
-          "type": "text",
-          "label": {
-            "ar": "نص زر البانر الثاني",
-            "en": "Second Banner Button Text"
-          },
-          "default": {
-            "ar": "اكتشف المجموعة",
-            "en": "Discover Collection"
-          },
-          "multilanguage": true
-        },
-        "promo_banner_2_link": {
-          "type": "url",
-          "label": {
-            "ar": "رابط البانر الثاني",
-            "en": "Second Banner Link"
-          },
-          "default": "#"
-        }
-      }
-    },
-    "footer": {
-      "type": "section",
-      "name": {
-        "ar": "الفوتر",
-        "en": "Footer"
-      },
-      "icon": "layout",
-      "settings": {
-        "footer_about": {
-          "type": "textarea",
-          "label": {
-            "ar": "نص عن المتجر",
-            "en": "About Store Text"
-          },
-          "default": {
-            "ar": "نحن نؤمن بأن الفخامة ليست مجرد مظهر، بل هي تجربة تعيشها في كل تفاصيل حياتك.",
-            "en": "We believe that luxury is not just an appearance, but an experience you live in every detail of your life."
-          },
-          "multilanguage": true
-        }
-      }
-    },
-    "colors": {
-      "type": "section",
-      "name": {
-        "ar": "الألوان",
-        "en": "Colors"
-      },
-      "icon": "palette",
-      "settings": {
-        "primary_color": {
-          "type": "color",
-          "label": {
-            "ar": "اللون الرئيسي",
-            "en": "Primary Color"
-          },
-          "default": "#D4AF37"
-        },
-        "secondary_color": {
-          "type": "color",
-          "label": {
-            "ar": "اللون الثانوي",
-            "en": "Secondary Color"
-          },
-          "default": "#0F172A"
-        }
-      }
-    }
-  },
-  "components": {
-    "hero": {
-      "name": {
-        "ar": "البانر الرئيسي",
-        "en": "Hero Banner"
-      },
-      "icon": "image"
-    },
-    "featured-products": {
-      "name": {
-        "ar": "المنتجات المميزة",
-        "en": "Featured Products"
-      },
-      "icon": "star"
-    },
-    "categories": {
-      "name": {
-        "ar": "التصنيفات السريعة",
-        "en": "Quick Categories"
-      },
-      "icon": "grid"
-    },
-    "offers-banner": {
-      "name": {
-        "ar": "بانرات العروض",
-        "en": "Offers Banners"
-      },
-      "icon": "tag"
-    },
-    "about-us": {
-      "name": {
-        "ar": "من نحن",
-        "en": "About Us"
-      },
-      "icon": "info"
-    },
-    "faq": {
-      "name": {
-        "ar": "الأسئلة الشائعة",
-        "en": "FAQ"
-      },
-      "icon": "help-circle"
-    }
-  }
+    ]
 }

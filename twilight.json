@@ -13,20 +13,12 @@
     ],
     "settings": [
         {
-            "type": "static",
-            "format": "title",
-            "id": "static-label-announcement",
-            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات شريط الإعلانات</h6></div>",
-            "variant": "h6"
-        },
-        {
             "type": "boolean",
             "id": "show_announcement",
             "label": "إظهار شريط الإعلانات",
             "format": "switch",
             "required": false,
-            "value": true,
-            "selected": true
+            "value": true
         },
         {
             "type": "string",
@@ -37,37 +29,12 @@
             "value": "شحن مجاني للطلبات أكثر من 500 ريال | استخدم كود GOLD20 لخصم 20%"
         },
         {
-            "type": "static",
-            "id": "static-line-1",
-            "format": "line"
-        },
-        {
-            "type": "static",
-            "format": "title",
-            "id": "static-label-header",
-            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات الهيدر</h6></div>",
-            "variant": "h6"
-        },
-        {
             "type": "boolean",
             "id": "header_is_sticky",
             "label": "تثبيت القائمة الرئيسية أعلى الصفحة عند التمرير",
             "format": "switch",
             "required": false,
-            "value": true,
-            "selected": true
-        },
-        {
-            "type": "static",
-            "id": "static-line-2",
-            "format": "line"
-        },
-        {
-            "type": "static",
-            "format": "title",
-            "id": "static-label-colors",
-            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات الألوان</h6></div>",
-            "variant": "h6"
+            "value": true
         },
         {
             "type": "string",
@@ -86,25 +53,12 @@
             "value": "#0F172A"
         },
         {
-            "type": "static",
-            "id": "static-line-3",
-            "format": "line"
-        },
-        {
-            "type": "static",
-            "format": "title",
-            "id": "static-label-footer",
-            "value": "<div class='rounded-lg' style='background-color: #D4AF37; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #ffffff;font-size: 15px; font-weight: bold;'>إعدادات الفوتر</h6></div>",
-            "variant": "h6"
-        },
-        {
             "type": "boolean",
             "id": "footer_is_dark",
             "label": "الفوتر بالوضع الداكن",
             "format": "switch",
             "required": false,
-            "value": true,
-            "selected": true
+            "value": true
         },
         {
             "type": "string",
